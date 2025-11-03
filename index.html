@@ -1,75 +1,87 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-<meta charset="UTF-8">
-<title>Feierabend Countdown</title>
-<style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    background: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  #movingImage {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 150px;
-  }
-</style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Feierabend Countdown</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      #movingImage {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="movingImage" src="./fish.png" alt="Feierabend Bild" />
 
-<img id="movingImage" src="./fish.png" alt="Feierabend Bild">
+    <script>
+      // URL-Parameter auslesen
+      const urlParams = new URLSearchParams(window.location.search);
+      const feierabendParam = urlParams.get("feierabend"); // z.B. HHMM oder HH:MM(:SS)
+      if (!feierabendParam) {
+        alert("Bitte einen 'feierabend'-Parameter in HH:MM angeben!");
+        throw new Error("Feierabend-Parameter fehlt");
+      }
 
-<script>
-  // URL-Parameter auslesen
-  const urlParams = new URLSearchParams(window.location.search);
-  const feierabendParam = urlParams.get('feierabend'); // Format: HH:MM
-  if(!feierabendParam) {
-    alert("Bitte einen 'feierabend'-Parameter in HH:MM angeben!");
-    throw new Error("Feierabend-Parameter fehlt");
-  }
+      const now = new Date();
+      let hour, minute, second = 0;
 
-  const [hour, minute] = feierabendParam.split(':').map(Number);
-  const now = new Date();
-  const feierabendTime = new Date();
-  feierabendTime.setHours(hour, minute, 0, 0);
+      if (feierabendParam.includes(":")) {
+        const parts = feierabendParam.split(":").map(Number);
+        hour = parts[0];
+        minute = parts[1];
+        second = parts[2] || 0; // optional
+      } else if (feierabendParam.length === 4) {
+        hour = Number(feierabendParam.slice(0, 2));
+        minute = Number(feierabendParam.slice(2, 4));
+      } else {
+        alert("Fehlerhaftes Zeitformat! Nutze HHMM oder HH:MM(:SS).");
+        throw new Error("Ungültiges Zeitformat");
+      }
 
-  if(feierabendTime < now) {
-    alert("Die angegebene Feierabend-Zeit liegt in der Vergangenheit!");
-    throw new Error("Feierabend-Zeit in der Vergangenheit");
-  }
+      const feierabendTime = new Date();
+      feierabendTime.setHours(hour, minute, second, 0);
 
-  const image = document.getElementById('movingImage');
-  const startX = window.innerWidth;
-  const endX = -image.width;
-  const totalDistance = startX - endX;
+      if (feierabendTime < now) {
+        alert("Die angegebene Feierabend-Zeit liegt in der Vergangenheit!");
+        throw new Error("Feierabend-Zeit in der Vergangenheit");
+      }
 
-  const totalTime = feierabendTime - now; // Millisekunden bis Feierabend
-  const speed = totalDistance / totalTime; // px/ms
+      const image = document.getElementById("movingImage");
+      const startX = window.innerWidth;
+      const endX = -image.width;
+      const totalDistance = startX - endX;
 
-  let posX = startX;
-  let lastTime = performance.now();
+      const totalTime = feierabendTime - now; // Millisekunden bis Feierabend
+      const speed = totalDistance / totalTime; // px/ms
 
-  function animate(time) {
-    const deltaTime = time - lastTime;
-    lastTime = time;
+      let posX = startX;
+      let lastTime = performance.now();
 
-    posX -= speed * deltaTime;
-    if(posX < endX) posX = endX;
-    image.style.left = posX + 'px';
+      function animate(time) {
+        const deltaTime = time - lastTime;
+        lastTime = time;
 
-    if(posX > endX) {
+        posX -= speed * deltaTime;
+        if (posX < endX) posX = endX;
+        image.style.left = posX + "px";
+
+        if (posX > endX) {
+          requestAnimationFrame(animate);
+        }
+      }
+
       requestAnimationFrame(animate);
-    }
-  }
-
-  requestAnimationFrame(animate);
-</script>
-
-</body>
+    </script>
+  </body>
 </html>
