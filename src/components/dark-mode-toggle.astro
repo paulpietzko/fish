@@ -1,0 +1,27 @@
+---
+import sunIcon from "../assets/icons/sun.svg";
+import moonIcon from "../assets/icons/moon.svg";
+---
+
+<button id="theme-toggle" class="p-2 bg-gray-200 rounded-full">
+  <img src={sunIcon.src} width="24" height="24" alt="Theme Toggle" />
+</button>
+
+<script>
+  // Initial theme setup (run on page load, in <head> ideally)
+  const root = document.documentElement;
+  const storedTheme = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
+    root.classList.add("dark");
+  } else {
+    root.classList.remove("dark");
+  }
+
+  // Toggle button
+  document.getElementById("theme-toggle")?.addEventListener("click", () => {
+    const isDark = root.classList.toggle("dark"); // switch dark/light
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+</script>

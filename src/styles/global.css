@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+:root {
+  background: white;
+  color: hsl(240 10% 3.9%);
+}
+
+.dark {
+  background: hsl(240 10% 3.9%);
+  color: white;
+}
+
+@layer base {
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+}
