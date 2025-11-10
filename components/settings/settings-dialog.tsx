@@ -12,10 +12,14 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import ThemeButtons from "./settings-theme-buttons";
+import SettingsFishCarouselSelector from "./settings-fish-carousel-selector";
 
-export default function SettingsDialog() {
+export default function SettingsDialog({
+  onFishSelect,
+}: {
+  onFishSelect?: (fish: number) => void;
+}) {
   const { open, setOpen } = useSettings();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -42,19 +46,17 @@ export default function SettingsDialog() {
             <ThemeButtons mounted={mounted} theme={theme} setTheme={setTheme} />
           </div>
           <div>
-            <label className="block text-sm font-medium">Example Toggle</label>
-            <p className="text-sm text-muted-foreground">
-              A placeholder setting to demonstrate layout.
-            </p>
+            <label className="block text-sm font-medium">Fish Selector</label>
+            <SettingsFishCarouselSelector onSelect={onFishSelect} />
           </div>
         </div>
 
         <DialogFooter className="flex justify-between">
           <Button variant="ghost" onClick={() => setOpen(false)}>
-            Close
+            Cancel
           </Button>
-          <Button variant="ghost" asChild>
-            <Link href="https://github.com/paulpietzko/fish">Contribute</Link>
+          <Button variant="ghost" onClick={() => setOpen(false)}>
+            Save
           </Button>
         </DialogFooter>
       </DialogContent>
