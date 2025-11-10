@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 import SettingsProvider from "@/components/settings-context";
 import SettingsButton from "@/components/settings-button";
 import SettingsDialog from "@/components/settings-dialog";
@@ -31,15 +32,22 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SettingsProvider>
-          {/* Top-right settings button */}
-          <div className="fixed top-4 right-4 z-50">
-            <SettingsButton />
-          </div>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {/* Top-right settings button */}
+            <div className="fixed top-4 right-4 z-50">
+              <SettingsButton />
+            </div>
 
-          {/* The dialog component is mounted at the root so it can be opened from anywhere */}
-          <SettingsDialog />
+            {/* The dialog component is mounted at the root so it can be opened from anywhere */}
+            <SettingsDialog />
 
-          {children}
+            {children}
+          </ThemeProvider>
         </SettingsProvider>
       </body>
     </html>

@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSettings } from "./settings-context";
-
+import { useTheme } from "next-themes";
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -14,48 +13,47 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import ThemeButtons from "./settings-theme-buttons";
 
 export default function SettingsDialog() {
   const { open, setOpen } = useSettings();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   return (
-    // Controlled dialog so open state syncs with context (keyboard + button)
     <Dialog open={open} onOpenChange={setOpen}>
-      {/* DialogTrigger isn't necessary because we open via context, but kept for accessibility patterns */}
-      <DialogTrigger asChild>
-        <span aria-hidden className="hidden" />
-      </DialogTrigger>
-
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
           <DialogDescription>
-            Adjust your preferences here. Shortcut: <kbd>Ctrl</kbd>/
-            <kbd>Cmd</kbd> + <kbd>E</kbd>
+            Adjust your preferences. Shortcut: <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> +{" "}
+            <kbd>E</kbd>
           </DialogDescription>
         </DialogHeader>
 
         <div className="mt-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
-              Theme
-            </label>
-            <div className="mt-2 flex gap-2">
-              <Button variant="outline" size="sm">
-                System
-              </Button>
-              <Button variant="outline" size="sm">
-                Light
-              </Button>
-              <Button variant="outline" size="sm">
-                Dark
-              </Button>
-            </div>
+            <label className="block text-sm font-medium">Theme</label>
+            <ThemeButtons mounted={mounted} theme={theme} setTheme={setTheme} />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Example Toggle</label>
+            <p className="text-sm text-muted-foreground">
+              A placeholder setting to demonstrate layout.
+            </p>
           </div>
         </div>
 
-        <DialogFooter>
+        <DialogFooter className="flex justify-between">
           <Button variant="ghost" onClick={() => setOpen(false)}>
+            Close
+          </Button>
+          <Button variant="ghost" asChild>
             <Link href="https://github.com/paulpietzko/fish">Contribute</Link>
           </Button>
         </DialogFooter>
