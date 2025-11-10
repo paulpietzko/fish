@@ -14,12 +14,20 @@ import {
 import { Button } from "@/components/ui/button";
 import ThemeButtons from "./settings-theme-buttons";
 import SettingsFishCarouselSelector from "./settings-fish-carousel-selector";
+import TimeSettings from "./settings-timestamps";
+import MovingModeSettings, { MovingMode } from "./settings-movingmode";
+
+interface SettingsDialogProps {
+  onFishSelect?: (fish: number) => void;
+  onTimeChange?: (start: string, end: string) => void;
+  onMovingModeChange?: (mode: MovingMode) => void;
+}
 
 export default function SettingsDialog({
   onFishSelect,
-}: {
-  onFishSelect?: (fish: number) => void;
-}) {
+  onTimeChange,
+  onMovingModeChange,
+}: SettingsDialogProps) {
   const { open, setOpen } = useSettings();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -40,18 +48,33 @@ export default function SettingsDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="mt-4 space-y-4">
+        <div className="mt-4 space-y-6">
+          {/* Theme */}
           <div>
-            <label className="block text-sm font-medium">Theme</label>
+            <h2 className="block text-xl font-medium">Theme</h2>
             <ThemeButtons mounted={mounted} theme={theme} setTheme={setTheme} />
           </div>
+
+          {/* Fish Selector */}
           <div>
-            <label className="block text-sm font-medium">Fish Selector</label>
+            <h2 className="block text-xl font-medium">Fish Selector</h2>
             <SettingsFishCarouselSelector onSelect={onFishSelect} />
+          </div>
+
+          {/* Time Settings */}
+          <div>
+            <h2 className="block text-xl font-medium">Fish Timing</h2>
+            <TimeSettings onChange={onTimeChange} />
+          </div>
+
+          {/* Moving Mode */}
+          <div>
+            <h2 className="block text-xl font-medium">Moving Mode</h2>
+            <MovingModeSettings onChange={onMovingModeChange} />
           </div>
         </div>
 
-        <DialogFooter className="flex justify-between">
+        <DialogFooter className="flex justify-between mt-4">
           <Button variant="ghost" onClick={() => setOpen(false)}>
             Cancel
           </Button>
