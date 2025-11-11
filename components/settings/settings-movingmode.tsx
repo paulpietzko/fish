@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export type MovingMode = "move" | "uncover";
 
@@ -12,6 +13,8 @@ export default function MovingModeSettings({
   initialMode?: MovingMode;
   onChange?: (mode: MovingMode) => void;
 }) {
+  const t = useTranslations("Settings.movement");
+
   const [mode, setMode] = useState<MovingMode>(initialMode);
 
   useEffect(() => {
@@ -25,14 +28,14 @@ export default function MovingModeSettings({
         variant={mode === "move" ? "default" : "outline"}
         onClick={() => setMode("move")}
       >
-        Move
+        {t("move")}
       </Button>
       <Button
         size="sm"
         variant={mode === "uncover" ? "default" : "outline"}
         onClick={() => setMode("uncover")}
       >
-        Uncover
+        {t("uncover")}
       </Button>
     </div>
   );

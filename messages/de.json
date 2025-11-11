@@ -1,5 +1,31 @@
 {
   "Settings": {
-    "title": "Einstellungen"
+    "title": "Einstellungen",
+    "Description": "Passen Sie Ihre Einstellungen an. Tastenkürzel: Strg/Cmd + E",
+    "close": "Schliessen",
+    "theme": {
+      "title": "Hell- Dunkelmodus",
+      "light": "Hell",
+      "dark": "Dunkel",
+      "system": "Systemgleich"
+    },
+    "language": {
+      "title": "Sprachauswahl",
+      "en": "Englisch",
+      "de": "Deutsch"
+    },
+    "fish": {
+      "title": "Fischauswahl"
+    },
+    "timestamps": {
+      "title": "Zeitstempel",
+      "start": "Startzeit",
+      "end": "Endzeit"
+    },
+    "movement": {
+      "title": "Bewegung",
+      "move": "Bewegen",
+      "uncover": "Aufdecken"
+    }
   }
 }

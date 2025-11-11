@@ -17,6 +17,7 @@ import SettingsFishCarouselSelector from "./settings-fish-carousel-selector";
 import TimeSettings from "./settings-timestamps";
 import MovingModeSettings, { MovingMode } from "./settings-movingmode";
 import { useTranslations } from "next-intl";
+import LanguageSettings from "./settings-language";
 
 interface SettingsDialogProps {
   currentFish?: number;
@@ -37,8 +38,8 @@ export default function SettingsDialog({
   onTimeChange,
   onMovingModeChange,
 }: SettingsDialogProps) {
-  const t = useTranslations('Settings');
-  
+  const t = useTranslations("Settings");
+
   const { open, setOpen } = useSettings();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -52,23 +53,26 @@ export default function SettingsDialog({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{t('title')}</DialogTitle>
-          <DialogDescription>
-            Adjust your preferences. Shortcut: <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> +{" "}
-            <kbd>E</kbd>
-          </DialogDescription>
+          <DialogTitle>{t("title")}</DialogTitle>
+          <DialogDescription>{t("Description")}</DialogDescription>
         </DialogHeader>
 
         <div className="mt-4 space-y-6">
           {/* Theme */}
           <div>
-            <h2 className="block text-xl font-medium">Theme</h2>
+            <h2 className="block text-xl font-medium">{t("theme.title")}</h2>
             <ThemeButtons mounted={mounted} theme={theme} setTheme={setTheme} />
+          </div>
+
+          {/* Language */}
+          <div>
+            <h2 className="block text-xl font-medium">{t("language.title")}</h2>
+            <LanguageSettings />
           </div>
 
           {/* Fish Selector */}
           <div>
-            <h2 className="block text-xl font-medium">Fish Selector</h2>
+            <h2 className="block text-xl font-medium">{t("fish.title")}</h2>
             <SettingsFishCarouselSelector
               initialFish={currentFish}
               onSelect={onFishSelect}
@@ -77,7 +81,9 @@ export default function SettingsDialog({
 
           {/* Time Settings */}
           <div>
-            <h2 className="block text-xl font-medium">Fish Timing</h2>
+            <h2 className="block text-xl font-medium">
+              {t("timestamps.title")}
+            </h2>
             <TimeSettings
               initialStart={currentStartTime}
               initialEnd={currentEndTime}
@@ -87,7 +93,7 @@ export default function SettingsDialog({
 
           {/* Moving Mode */}
           <div>
-            <h2 className="block text-xl font-medium">Moving Mode</h2>
+            <h2 className="block text-xl font-medium">{t("movement.title")}</h2>
             <MovingModeSettings
               initialMode={currentMovingMode}
               onChange={onMovingModeChange}
@@ -97,7 +103,7 @@ export default function SettingsDialog({
 
         <DialogFooter className="flex justify-between mt-4">
           <Button variant="ghost" onClick={() => setOpen(false)}>
-            Close
+            {t("close")}
           </Button>
         </DialogFooter>
       </DialogContent>

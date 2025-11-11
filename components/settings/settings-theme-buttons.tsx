@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function ThemeButtons({
   mounted,
@@ -9,20 +10,26 @@ export default function ThemeButtons({
   theme: string | undefined;
   setTheme: (t: string) => void;
 }) {
+  const t = useTranslations("Settings.theme");
+
   if (!mounted) return null;
 
   const variant = (t: string) => (theme === t ? "default" : "outline");
 
   return (
     <div className="mt-2 flex gap-2">
-      {["system", "light", "dark"].map((t) => (
+      {[
+        { title: t("system"), value: "system" },
+        { title: t("light"), value: "light" },
+        { title: t("dark"), value: "dark" },
+      ].map(({ title, value }) => (
         <Button
-          key={t}
+          key={value}
           size="sm"
-          variant={variant(t)}
-          onClick={() => setTheme(t)}
+          variant={variant(value)}
+          onClick={() => setTheme(value)}
         >
-          {t[0].toUpperCase() + t.slice(1)}
+          {title}
         </Button>
       ))}
     </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 
 export default function TimeSettings({
@@ -11,6 +12,8 @@ export default function TimeSettings({
   initialEnd: string;
   onChange?: (startTime: string, endTime: string) => void;
 }) {
+  const t = useTranslations("Settings.timestamps");
+  
   const [startTime, setStartTime] = useState(initialStart);
   const [endTime, setEndTime] = useState(initialEnd);
 
@@ -21,7 +24,7 @@ export default function TimeSettings({
   return (
     <div className="flex gap-4 items-center">
       <div>
-        <label className="block text-sm font-medium">Start Time</label>
+        <label className="block text-sm font-medium">{t("start")}</label>
         <input
           type="time"
           value={startTime}
@@ -30,7 +33,7 @@ export default function TimeSettings({
         />
       </div>
       <div>
-        <label className="block text-sm font-medium">End Time</label>
+        <label className="block text-sm font-medium">{t("end")}</label>
         <input
           type="time"
           value={endTime}

@@ -1,5 +1,31 @@
 {
   "Settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "Description": "Adjust your preferences. Shortcut: Ctrl/Cmd + E",
+    "close": "Close",
+    "theme": {
+      "title": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "language": {
+      "title": "Language Settings",
+      "en": "English",
+      "de": "German"
+    },
+    "fish": {
+      "title": "Fish Carousel"
+    },
+    "timestamps": {
+      "title": "Timestamps",
+      "start": "Start Time",
+      "end": "End Time"
+    },
+    "movement": {
+      "title": "Movement",
+      "move": "Move",
+      "uncover": "Uncover"
+    }
   }
 }
