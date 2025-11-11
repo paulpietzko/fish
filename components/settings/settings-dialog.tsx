@@ -18,12 +18,20 @@ import TimeSettings from "./settings-timestamps";
 import MovingModeSettings, { MovingMode } from "./settings-movingmode";
 
 interface SettingsDialogProps {
+  currentFish?: number;
+  currentStartTime: string;
+  currentEndTime: string;
+  currentMovingMode?: MovingMode;
   onFishSelect?: (fish: number) => void;
   onTimeChange?: (start: string, end: string) => void;
   onMovingModeChange?: (mode: MovingMode) => void;
 }
 
 export default function SettingsDialog({
+  currentFish = 1,
+  currentStartTime = "07:00",
+  currentEndTime = "16:30",
+  currentMovingMode = "move",
   onFishSelect,
   onTimeChange,
   onMovingModeChange,
@@ -58,28 +66,35 @@ export default function SettingsDialog({
           {/* Fish Selector */}
           <div>
             <h2 className="block text-xl font-medium">Fish Selector</h2>
-            <SettingsFishCarouselSelector onSelect={onFishSelect} />
+            <SettingsFishCarouselSelector
+              initialFish={currentFish}
+              onSelect={onFishSelect}
+            />
           </div>
 
           {/* Time Settings */}
           <div>
             <h2 className="block text-xl font-medium">Fish Timing</h2>
-            <TimeSettings onChange={onTimeChange} />
+            <TimeSettings
+              initialStart={currentStartTime}
+              initialEnd={currentEndTime}
+              onChange={onTimeChange}
+            />
           </div>
 
           {/* Moving Mode */}
           <div>
             <h2 className="block text-xl font-medium">Moving Mode</h2>
-            <MovingModeSettings onChange={onMovingModeChange} />
+            <MovingModeSettings
+              initialMode={currentMovingMode}
+              onChange={onMovingModeChange}
+            />
           </div>
         </div>
 
         <DialogFooter className="flex justify-between mt-4">
           <Button variant="ghost" onClick={() => setOpen(false)}>
-            Cancel
-          </Button>
-          <Button variant="ghost" onClick={() => setOpen(false)}>
-            Save
+            Close
           </Button>
         </DialogFooter>
       </DialogContent>

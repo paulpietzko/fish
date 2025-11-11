@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 
 export default function TimeSettings({
-  initialStart = "08:00",
-  initialEnd = "20:00",
+  initialStart,
+  initialEnd,
   onChange,
 }: {
-  initialStart?: string;
-  initialEnd?: string;
+  initialStart: string;
+  initialEnd: string;
   onChange?: (startTime: string, endTime: string) => void;
 }) {
   const [startTime, setStartTime] = useState(initialStart);

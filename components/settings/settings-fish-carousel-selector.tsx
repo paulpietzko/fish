@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   Carousel,
@@ -11,12 +11,19 @@ import {
 } from "@/components/ui/carousel";
 
 export default function SettingsFishCarouselSelector({
+  initialFish = 1,
   onSelect,
 }: {
+  initialFish?: number;
   onSelect?: (fish: number) => void;
 }) {
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState(initialFish);
   const fishes = [1, 2, 3];
+
+  // Update selected fish when initialFish changes
+  useEffect(() => {
+    setSelected(initialFish);
+  }, [initialFish]);
 
   const handleSelect = (num: number) => {
     setSelected(num);
@@ -42,7 +49,7 @@ export default function SettingsFishCarouselSelector({
                   alt={`Fish ${num}`}
                   width={128}
                   height={128}
-                className="w-full h-full object-contain"
+                  className="w-full h-full object-contain"
                 />
               </button>
             </CarouselItem>

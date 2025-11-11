@@ -3,12 +3,12 @@
 import React from "react";
 
 export default function TimeGrid({
-  startTime = "08:00",
-  endTime = "20:00",
+  startTime,
+  endTime,
   steps = 6, // number of tick marks including start and end
 }: {
-  startTime?: string;
-  endTime?: string;
+  startTime: string;
+  endTime: string;
   steps?: number;
 }) {
   // Helper: format time string as HH:MM

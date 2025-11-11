@@ -8,12 +8,16 @@ import TimeGrid from "@/components/time-grid";
 export default function Home() {
   const [selectedFish, setSelectedFish] = useState(1);
   const [movingMode, setMovingMode] = useState<"move" | "uncover">("move");
-  const [startTime, setStartTime] = useState("08:00");
-  const [endTime, setEndTime] = useState("20:00");
+  const [startTime, setStartTime] = useState("07:00");
+  const [endTime, setEndTime] = useState("16:30");
 
   return (
     <main className="flex flex-col items-center gap-6 p-6">
       <SettingsDialog
+        currentFish={selectedFish}
+        currentStartTime={startTime}
+        currentEndTime={endTime}
+        currentMovingMode={movingMode}
         onFishSelect={setSelectedFish}
         onTimeChange={(start, end) => {
           setStartTime(start);

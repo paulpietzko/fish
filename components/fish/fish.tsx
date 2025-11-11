@@ -6,13 +6,13 @@ import type { MovingMode } from "@/components/settings/settings-movingmode";
 
 export default function Fish({
   selectedFish = 1,
-  startTime = "08:00",
-  endTime = "20:00",
+  startTime,
+  endTime,
   movingMode = "move",
 }: {
   selectedFish?: number;
-  startTime?: string;
-  endTime?: string;
+  startTime: string;
+  endTime: string;
   movingMode?: MovingMode;
 }) {
   const imgSrc = `/images/fish/${selectedFish}.png`;
@@ -28,14 +28,19 @@ export default function Fish({
     const startMinutes = timeToMinutes(startTime);
     const endMinutes = timeToMinutes(endTime);
 
-    const interval = setInterval(() => {
+    const updateProgress = () => {
       const now = new Date();
       const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
       let prog = (currentMinutes - startMinutes) / (endMinutes - startMinutes);
       prog = Math.max(0, Math.min(1, prog));
       setProgress(prog);
-    }, 1000);
+    };
+
+    // Update immediately
+    updateProgress();
+
+    const interval = setInterval(updateProgress, 1000);
 
     return () => clearInterval(interval);
   }, [startTime, endTime]);
@@ -43,10 +48,12 @@ export default function Fish({
   const style =
     movingMode === "move"
       ? {
+          // Move mode: Fish moves from left (-100%) to right (0%)
           transform: `translateX(${progress * 100 - 100}%)`,
           transition: "transform 1s linear",
         }
       : {
+          // Uncover mode: Fish stays in place, revealed from left to right
           clipPath: `inset(0 ${100 - progress * 100}% 0 0)`,
           transition: "clip-path 1s linear",
         };
