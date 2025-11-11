@@ -16,11 +16,12 @@ import ThemeButtons from "./settings-theme-buttons";
 import SettingsFishCarouselSelector from "./settings-fish-carousel-selector";
 import TimeSettings from "./settings-timestamps";
 import MovingModeSettings, { MovingMode } from "./settings-movingmode";
+import { useTranslations } from "next-intl";
 
 interface SettingsDialogProps {
   currentFish?: number;
-  currentStartTime: string;
-  currentEndTime: string;
+  currentStartTime?: string;
+  currentEndTime?: string;
   currentMovingMode?: MovingMode;
   onFishSelect?: (fish: number) => void;
   onTimeChange?: (start: string, end: string) => void;
@@ -36,6 +37,8 @@ export default function SettingsDialog({
   onTimeChange,
   onMovingModeChange,
 }: SettingsDialogProps) {
+  const t = useTranslations('Settings');
+  
   const { open, setOpen } = useSettings();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -49,7 +52,7 @@ export default function SettingsDialog({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Settings</DialogTitle>
+          <DialogTitle>{t('title')}</DialogTitle>
           <DialogDescription>
             Adjust your preferences. Shortcut: <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> +{" "}
             <kbd>E</kbd>
