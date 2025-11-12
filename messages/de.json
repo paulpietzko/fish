@@ -31,5 +31,11 @@
       "title": "Zeitstrahl",
       "show": "Zeitstrahl anzeigen"
     }
+  },
+  "Fish": {
+    "completed": "Zeit ist um! Gut gemacht!"
+  },
+  "Footer": {
+    "text": "TODO"
   }
 }

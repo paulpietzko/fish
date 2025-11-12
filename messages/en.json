@@ -31,5 +31,11 @@
       "title": "Time Grid",
       "show": "Show time grid"
     }
+  },
+  "Fish": {
+    "completed": "Time's up! Great job!"
+  },
+  "Footer": {
+    "text": "TODO"
   }
 }

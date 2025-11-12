@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import Fish from "@/components/fish/fish";
 import SettingsDialog from "@/components/settings/settings-dialog";
 import TimeGrid from "@/components/time-grid";
