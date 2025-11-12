@@ -26,6 +26,10 @@
       "title": "Movement",
       "move": "Move",
       "uncover": "Uncover"
+    },
+    "timegrid": {
+      "title": "Time Grid",
+      "show": "Show time grid"
     }
   }
 }

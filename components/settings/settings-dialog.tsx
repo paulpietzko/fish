@@ -16,6 +16,7 @@ import ThemeButtons from "./settings-theme-buttons";
 import SettingsFishCarouselSelector from "./settings-fish-carousel-selector";
 import TimeSettings from "./settings-timestamps";
 import MovingModeSettings, { MovingMode } from "./settings-movingmode";
+import TimeGridToggle from "./settings-timegrid-toggle";
 import { useTranslations } from "next-intl";
 import LanguageSettings from "./settings-language";
 
@@ -24,9 +25,11 @@ interface SettingsDialogProps {
   currentStartTime?: string;
   currentEndTime?: string;
   currentMovingMode?: MovingMode;
+  currentShowTimeGrid?: boolean;
   onFishSelect?: (fish: number) => void;
   onTimeChange?: (start: string, end: string) => void;
   onMovingModeChange?: (mode: MovingMode) => void;
+  onTimeGridToggle?: (enabled: boolean) => void;
 }
 
 export default function SettingsDialog({
@@ -34,9 +37,11 @@ export default function SettingsDialog({
   currentStartTime = "07:00",
   currentEndTime = "16:30",
   currentMovingMode = "move",
+  currentShowTimeGrid = true,
   onFishSelect,
   onTimeChange,
   onMovingModeChange,
+  onTimeGridToggle,
 }: SettingsDialogProps) {
   const t = useTranslations("Settings");
 
@@ -51,7 +56,7 @@ export default function SettingsDialog({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent>
+      <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription>{t("Description")}</DialogDescription>
@@ -97,6 +102,15 @@ export default function SettingsDialog({
             <MovingModeSettings
               initialMode={currentMovingMode}
               onChange={onMovingModeChange}
+            />
+          </div>
+
+          {/* Time Grid Toggle */}
+          <div>
+            <h2 className="block text-xl font-medium">{t("timegrid.title")}</h2>
+            <TimeGridToggle
+              initialValue={currentShowTimeGrid}
+              onChange={onTimeGridToggle}
             />
           </div>
         </div>

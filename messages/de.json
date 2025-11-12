@@ -26,6 +26,10 @@
       "title": "Bewegung",
       "move": "Bewegen",
       "uncover": "Aufdecken"
+    },
+    "timegrid": {
+      "title": "Zeitstrahl",
+      "show": "Zeitstrahl anzeigen"
     }
   }
 }
