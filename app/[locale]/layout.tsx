@@ -8,6 +8,7 @@ import SettingsDialog from "@/components/settings/settings-dialog";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import Footer from "@/components/layout/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +58,7 @@ export default async function RootLayout({ children, params }: Props) {
               <SettingsDialog />
 
               {children}
+              <Footer />
             </NextIntlClientProvider>
           </ThemeProvider>
         </SettingsProvider>
