@@ -5,17 +5,17 @@ import Image from "next/image";
 import type { MovingMode } from "@/components/settings/settings-movingmode";
 import { useTranslations } from "next-intl";
 
-const CLICK_MESSAGES = [
-  "no not yet",
-  "we can't",
-  "another few...",
-  "i also can't wait",
-  "should we",
-  "patience...",
-  "almost there",
-  "not quite",
-  "hold on",
-  "soon!",
+const CLICK_MESSAGE_KEYS = [
+  "msg1",
+  "msg2",
+  "msg3",
+  "msg4",
+  "msg5",
+  "msg6",
+  "msg7",
+  "msg8",
+  "msg9",
+  "msg10",
 ];
 
 export default function Fish({
@@ -78,17 +78,17 @@ export default function Fish({
     setIsWobbling(true);
     setTimeout(() => setIsWobbling(false), 500);
 
-    // Show random message
-    const randomMessage =
-      CLICK_MESSAGES[Math.floor(Math.random() * CLICK_MESSAGES.length)];
-    setClickMessage(randomMessage);
+    // Show random translated message
+    const randomKey =
+      CLICK_MESSAGE_KEYS[Math.floor(Math.random() * CLICK_MESSAGE_KEYS.length)];
+    setClickMessage(t(randomKey));
 
     // Hide message after 2 seconds
     setTimeout(() => setClickMessage(""), 2000);
   };
 
   if (movingMode === "move") {
-    // Move mode: Fish moves from left edge to right edge
+    // Move mode: Fish moves from left edge to right edge (fish's right edge aligns with right at 100%)
     return (
       <div className="relative w-full">
         <div className="relative w-full h-96 flex items-center overflow-visible">
@@ -96,7 +96,7 @@ export default function Fish({
             className="absolute flex items-center justify-center cursor-pointer"
             style={{
               left: `${progress * 100}%`,
-              transform: "translateX(-50%)",
+              transform: "translateX(-100%)", // Changed: now the fish's right edge is at the position
               transition: "left 1s linear",
               width: "800px",
               height: "800px",

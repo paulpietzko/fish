@@ -33,9 +33,22 @@
     }
   },
   "Fish": {
-    "completed": "Zeit ist um! Gut gemacht!"
+    "completed": "Zeit ist um! Gut gemacht!",
+    "msg1": "nein noch nicht",
+    "msg2": "wir können nicht",
+    "msg3": "noch ein paar...",
+    "msg4": "ich kann es auch kaum erwarten",
+    "msg5": "sollten wir",
+    "msg6": "geduld...",
+    "msg7": "fast da",
+    "msg8": "noch nicht ganz",
+    "msg9": "warte ab",
+    "msg10": "bald!"
   },
   "Footer": {
-    "text": "TODO"
+    "madeBy": "Made by",
+    "boredDevs": "bored devs",
+    "sponsoredBy": "Sponsored by",
+    "copyright": "Copyright © {year}. All rights reserved."
   }
 }

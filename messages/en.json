@@ -33,9 +33,22 @@
     }
   },
   "Fish": {
-    "completed": "Time's up! Great job!"
+    "completed": "Time's up! Great job!",
+    "msg1": "no not yet",
+    "msg2": "we can't",
+    "msg3": "another few...",
+    "msg4": "i also can't wait",
+    "msg5": "should we",
+    "msg6": "patience...",
+    "msg7": "almost there",
+    "msg8": "not quite",
+    "msg9": "hold on",
+    "msg10": "soon!"
   },
   "Footer": {
-    "text": "TODO"
+    "madeBy": "Made by",
+    "boredDevs": "bored devs",
+    "sponsoredBy": "Sponsored by",
+    "copyright": "Copyright © {year}. All rights reserved."
   }
 }

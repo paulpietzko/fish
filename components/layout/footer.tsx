@@ -1,16 +1,21 @@
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 export default function Footer() {
+  const t = useTranslations("Footer");
+
   return (
     <footer className="w-full p-4 text-center text-sm text-gray-500">
       <p>
-        Made by{" "}
+        {t("madeBy")}{" "}
         <Link href="https://github.com/paulpietzko/fish/graphs/contributors">
-          bored devs
+          {t("boredDevs")}
         </Link>{" "}
-        | Spnsored by <Link href="https://www.nanosights.dev">NanoSights</Link>
+        | {t("sponsoredBy")} <Link href="https://www.nanosights.dev">NanoSights</Link>
       </p>
-      <p>Copryright © {new Date().getFullYear()}. All rights reserved.</p>
+      <p>
+        {t("copyright", { year: new Date().getFullYear() })}
+      </p>
     </footer>
   );
 }
