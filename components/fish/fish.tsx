@@ -96,7 +96,7 @@ export default function Fish({
             className="absolute flex items-center justify-center cursor-pointer"
             style={{
               left: `${progress * 100}%`,
-              transform: "translateX(-100%)", // Changed: now the fish's right edge is at the position
+              transform: "translateX(-100%)",
               transition: "left 1s linear",
               width: "800px",
               height: "800px",
