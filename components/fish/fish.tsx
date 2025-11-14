@@ -99,7 +99,7 @@ export default function Fish({
               transform: "translateX(-100%)",
               transition: "left 1s linear",
               width: "800px",
-              height: "800px",
+              height: "400px",
             }}
             onClick={handleFishClick}
           >
@@ -109,7 +109,7 @@ export default function Fish({
               width={800}
               height={800}
               className={`object-contain ${isWobbling ? "animate-wobble" : ""}`}
-              style={{ width: "800px", height: "800px" }}
+              style={{ width: "800px", height: "400px" }}
             />
           </div>
         </div>
@@ -140,17 +140,17 @@ export default function Fish({
         <div
           className="cursor-pointer"
           onClick={handleFishClick}
-          style={{ width: "800px", height: "800px" }}
+          style={{ width: "800px", height: "400px" }}
         >
           <Image
             src={imgSrc}
             alt={`Fish ${selectedFish}`}
             width={800}
-            height={800}
+            height={400}
             className={`object-contain ${isWobbling ? "animate-wobble" : ""}`}
             style={{
               width: "800px",
-              height: "800px",
+              height: "400px",
               clipPath: `inset(0 ${100 - progress * 100}% 0 0)`,
               transition: "clip-path 1s linear",
             }}
