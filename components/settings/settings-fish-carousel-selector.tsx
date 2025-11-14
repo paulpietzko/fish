@@ -35,7 +35,7 @@ export default function SettingsFishCarouselSelector({
       <Carousel className="max-w-xs mx-auto">
         <CarouselContent>
           {fishes.map((num) => (
-            <CarouselItem key={num} className="w-16 h-16 flex-shrink-0">
+            <CarouselItem key={num} className="w-16 h-full flex-shrink-0">
               <button
                 onClick={() => handleSelect(num)}
                 className={`rounded-xl border-2 p-2 transition ${
