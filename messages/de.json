@@ -46,9 +46,9 @@
     "msg10": "bald!"
   },
   "Footer": {
-    "madeBy": "Made by",
-    "boredDevs": "bored devs",
-    "sponsoredBy": "Sponsored by",
-    "copyright": "Copyright © {year}. All rights reserved."
+    "madeBy": "Entwickelt von",
+    "boredDevs": "gelangweilten Entwicklern",
+    "sponsoredBy": "Gesponsert von",
+    "copyright": "Copyright © {year}. Alle Rechte vorbehalten."
   }
 }
