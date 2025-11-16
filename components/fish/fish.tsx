@@ -4,19 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import type { MovingMode } from "@/components/settings/settings-movingmode";
 import { useTranslations } from "next-intl";
-
-const CLICK_MESSAGE_KEYS = [
-  "msg1",
-  "msg2",
-  "msg3",
-  "msg4",
-  "msg5",
-  "msg6",
-  "msg7",
-  "msg8",
-  "msg9",
-  "msg10",
-];
+import { PARTY_EMOJIS } from "@/lib/party-emojis";
+import { CLICK_MESSAGE_KEYS } from "@/lib/fish-click-messages";
 
 export default function Fish({
   selectedFish = 1,
@@ -34,6 +23,9 @@ export default function Fish({
   const [isWobbling, setIsWobbling] = useState(false);
   const [clickMessage, setClickMessage] = useState("");
   const [showCompletionMessage, setShowCompletionMessage] = useState(false);
+  const [confetti, setConfetti] = useState<
+    Array<{ id: number; emoji: string; left: number; delay: number }>
+  >([]);
   const t = useTranslations("Fish");
 
   // Convert time string to minutes
@@ -57,8 +49,17 @@ export default function Fish({
       // Show completion message when finished
       if (prog >= 1 && !showCompletionMessage) {
         setShowCompletionMessage(true);
+        // Trigger confetti
+        const newConfetti = Array.from({ length: 50 }, (_, i) => ({
+          id: i,
+          emoji: PARTY_EMOJIS[Math.floor(Math.random() * PARTY_EMOJIS.length)],
+          left: Math.random() * 100,
+          delay: Math.random() * 0.5,
+        }));
+        setConfetti(newConfetti);
       } else if (prog < 1 && showCompletionMessage) {
         setShowCompletionMessage(false);
+        setConfetti([]);
       }
     };
 
@@ -108,7 +109,9 @@ export default function Fish({
               alt={`Fish ${selectedFish}`}
               width={800}
               height={800}
-              className={`object-contain ${isWobbling ? "animate-wobble" : ""}`}
+              className={`object-contain ${
+                isWobbling ? "animate-wobble" : ""
+              } ${showCompletionMessage ? "animate-party-spin" : ""}`}
               style={{ width: "800px", height: "400px" }}
             />
           </div>
@@ -121,11 +124,26 @@ export default function Fish({
           </div>
         )}
 
+        {/* Confetti */}
+        {showCompletionMessage &&
+          confetti.map((conf) => (
+            <div
+              key={conf.id}
+              className="absolute top-0 text-4xl animate-confetti pointer-events-none"
+              style={{
+                left: `${conf.left}%`,
+                animationDelay: `${conf.delay}s`,
+              }}
+            >
+              {conf.emoji}
+            </div>
+          ))}
+
         {/* Completion Message */}
         {showCompletionMessage && (
           <div className="mt-4 text-center">
-            <p className="text-2xl font-bold text-green-600 dark:text-green-400 animate-bounce">
-              🎉 {t("completed")} 🎉
+            <p className="text-4xl font-bold text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text animate-rainbow-pulse">
+              🎉✨ {t("completed")} ✨🎉
             </p>
           </div>
         )}
@@ -147,7 +165,9 @@ export default function Fish({
             alt={`Fish ${selectedFish}`}
             width={800}
             height={400}
-            className={`object-contain ${isWobbling ? "animate-wobble" : ""}`}
+            className={`object-contain ${isWobbling ? "animate-wobble" : ""} ${
+              showCompletionMessage ? "animate-party-spin" : ""
+            }`}
             style={{
               width: "800px",
               height: "400px",
@@ -165,11 +185,26 @@ export default function Fish({
         </div>
       )}
 
+      {/* Confetti */}
+      {showCompletionMessage &&
+        confetti.map((conf) => (
+          <div
+            key={conf.id}
+            className="absolute top-0 text-4xl animate-confetti pointer-events-none"
+            style={{
+              left: `${conf.left}%`,
+              animationDelay: `${conf.delay}s`,
+            }}
+          >
+            {conf.emoji}
+          </div>
+        ))}
+
       {/* Completion Message */}
       {showCompletionMessage && (
         <div className="mt-4 text-center">
-          <p className="text-2xl font-bold text-green-600 dark:text-green-400 animate-bounce">
-            🎉 {t("completed")} 🎉
+          <p className="text-4xl font-bold text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text animate-rainbow-pulse">
+            🎉✨ {t("completed")} ✨🎉
           </p>
         </div>
       )}

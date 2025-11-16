@@ -1,0 +1,12 @@
+export const CLICK_MESSAGE_KEYS = [
+  "msg1",
+  "msg2",
+  "msg3",
+  "msg4",
+  "msg5",
+  "msg6",
+  "msg7",
+  "msg8",
+  "msg9",
+  "msg10",
+];
