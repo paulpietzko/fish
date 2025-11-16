@@ -2,7 +2,6 @@
   "Settings": {
     "title": "Settings",
     "Description": "Adjust your preferences. Shortcut: Ctrl/Cmd + E",
-    "close": "Close",
     "theme": {
       "title": "Theme",
       "light": "Light",

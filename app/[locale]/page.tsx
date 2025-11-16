@@ -59,7 +59,12 @@ export default function Home() {
         movingMode={movingMode}
       />
       {showTimeGrid && (
-        <TimeGrid startTime={startTime} endTime={endTime} steps={7} />
+        <TimeGrid
+          startTime={startTime}
+          endTime={endTime}
+          steps={7}
+          movingMode={movingMode}
+        />
       )}
     </main>
   );

@@ -9,9 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-  DialogFooter,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import ThemeButtons from "./settings-theme-buttons";
 import SettingsFishCarouselSelector from "./settings-fish-carousel-selector";
 import TimeSettings from "./settings-timestamps";
@@ -114,12 +112,6 @@ export default function SettingsDialog({
             />
           </div>
         </div>
-
-        <DialogFooter className="flex justify-between mt-4">
-          <Button variant="ghost" onClick={() => setOpen(false)}>
-            {t("close")}
-          </Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

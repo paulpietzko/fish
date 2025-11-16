@@ -1,38 +1,52 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import type { MovingMode } from "@/components/settings/settings-movingmode";
 
 export default function TimeGrid({
   startTime,
   endTime,
-  steps = 6, // number of tick marks including start and end
+  steps = 7,
+  movingMode = "move",
 }: {
   startTime: string;
   endTime: string;
   steps?: number;
+  movingMode?: MovingMode;
 }) {
   const [currentProgress, setCurrentProgress] = useState(0);
 
   // Helper: format time string as HH:MM
   const formatTime = (minutes: number) => {
+    // Ensure minutes is a valid number
+    if (!isFinite(minutes) || isNaN(minutes)) {
+      return "00:00";
+    }
     const h = Math.floor(minutes / 60);
-    const m = minutes % 60;
+    const m = Math.round(minutes % 60);
     return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
   };
 
   // Convert start/end time to minutes
   const timeToMinutes = (t: string) => {
-    const [h, m] = t.split(":").map(Number);
+    if (!t || typeof t !== "string") return 0;
+    const parts = t.split(":");
+    if (parts.length !== 2) return 0;
+    const h = parseInt(parts[0], 10);
+    const m = parseInt(parts[1], 10);
+    if (isNaN(h) || isNaN(m)) return 0;
     return h * 60 + m;
   };
 
   const startMinutes = timeToMinutes(startTime);
   const endMinutes = timeToMinutes(endTime);
-  const interval = (endMinutes - startMinutes) / (steps - 1);
+  const totalMinutes = endMinutes - startMinutes;
+  const intervalMinutes = totalMinutes / (steps - 1);
 
-  const ticks = Array.from({ length: steps }, (_, i) =>
-    formatTime(Math.round(startMinutes + interval * i))
-  );
+  const ticks = Array.from({ length: steps }, (_, i) => {
+    const tickMinutes = startMinutes + intervalMinutes * i;
+    return formatTime(tickMinutes);
+  });
 
   // Update current time progress
   useEffect(() => {
@@ -40,7 +54,12 @@ export default function TimeGrid({
       const now = new Date();
       const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-      let prog = (currentMinutes - startMinutes) / (endMinutes - startMinutes);
+      if (totalMinutes <= 0) {
+        setCurrentProgress(0);
+        return;
+      }
+
+      let prog = (currentMinutes - startMinutes) / totalMinutes;
       prog = Math.max(0, Math.min(1, prog));
       setCurrentProgress(prog);
     };
@@ -49,18 +68,24 @@ export default function TimeGrid({
     updateProgress();
 
     // Update every second
-    const interval = setInterval(updateProgress, 1000);
+    const intervalId = setInterval(updateProgress, 1000);
 
-    return () => clearInterval(interval);
-  }, [startTime, endTime, startMinutes, endMinutes]);
+    return () => clearInterval(intervalId);
+  }, [startTime, endTime, startMinutes, totalMinutes]);
+
+  // In uncover mode, match fish width (800px)
+  const containerClass = movingMode === "uncover" ? "mx-auto" : "w-full";
+
+  const containerStyle =
+    movingMode === "uncover" ? { width: "800px", maxWidth: "100%" } : {};
 
   return (
-    <div className="w-full mt-4">
+    <div className={`mt-4 ${containerClass}`} style={containerStyle}>
       <div className="relative h-6 border-t border-slate-300 dark:border-slate-600">
         {/* Time ticks */}
         {ticks.map((tick, i) => (
           <div
-            key={tick}
+            key={`${tick}-${i}`}
             className="absolute top-0 flex flex-col items-center"
             style={{
               left: `${(i / (ticks.length - 1)) * 100}%`,
@@ -68,7 +93,7 @@ export default function TimeGrid({
             }}
           >
             <div className="w-px h-2 bg-slate-500 dark:bg-slate-400" />
-            <span className="text-xs text-slate-600 dark:text-slate-300 mt-1">
+            <span className="text-xs text-slate-600 dark:text-slate-300 mt-1 whitespace-nowrap">
               {tick}
             </span>
           </div>

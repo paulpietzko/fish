@@ -2,7 +2,6 @@
   "Settings": {
     "title": "Einstellungen",
     "Description": "Passen Sie Ihre Einstellungen an. Tastenkürzel: Strg/Cmd + E",
-    "close": "Schliessen",
     "theme": {
       "title": "Hell- Dunkelmodus",
       "light": "Hell",
