@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { fish } from "@/lib/fish-data";
 
 export default function SettingsFishCarouselSelector({
   initialFish = 1,
@@ -18,7 +19,6 @@ export default function SettingsFishCarouselSelector({
   onSelect?: (fish: number) => void;
 }) {
   const [selected, setSelected] = useState(initialFish);
-  const fishes = [1, 2, 3, 4];
 
   // Update selected fish when initialFish changes
   useEffect(() => {
@@ -34,19 +34,19 @@ export default function SettingsFishCarouselSelector({
     <div>
       <Carousel className="max-w-xs mx-auto">
         <CarouselContent>
-          {fishes.map((num) => (
-            <CarouselItem key={num} className="w-16 h-full flex-shrink-0">
+          {fish.map((fish) => (
+            <CarouselItem key={fish.id} className="w-16 h-full flex-shrink-0">
               <button
-                onClick={() => handleSelect(num)}
+                onClick={() => handleSelect(fish.id)}
                 className={`rounded-xl border-2 p-2 transition ${
-                  selected === num
+                  selected === fish.id
                     ? "border-primary bg-primary/10"
                     : "border-transparent hover:border-muted-foreground/30"
                 }`}
               >
                 <Image
-                  src={`/images/fish/${num}.png`}
-                  alt={`Fish ${num}`}
+                  src={`/images/fish/${fish.id}.png`}
+                  alt={`Fish ${fish.name}`}
                   width={128}
                   height={128}
                   className="w-full h-full object-contain"
