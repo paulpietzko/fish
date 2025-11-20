@@ -16,6 +16,7 @@ export default function Footer() {
       <p>
         {t("copyright", { year: new Date().getFullYear() })}
       </p>
+      <Link href="fish-references">{t("fishReferences")}</Link>
     </footer>
   );
 }

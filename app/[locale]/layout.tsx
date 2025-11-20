@@ -31,14 +31,7 @@ export const metadata: Metadata = {
     template: "%s | Fish",
   },
   description: "",
-  keywords: [
-    "fish",
-    "timer",
-    "work",
-    "break",
-    "after-work",
-    "bored",
-  ],
+  keywords: ["fish", "timer", "work", "break", "after-work", "bored"],
 };
 
 type Props = {
@@ -65,16 +58,18 @@ export default async function RootLayout({ children, params }: Props) {
             disableTransitionOnChange
           >
             <NextIntlClientProvider>
-              {/* Top-right settings button */}
-              <div className="fixed top-4 right-4 z-50">
-                <SettingsButton />
+              <div className=" overflow-hidden">
+                {/* Top-right settings button */}
+                <div className="fixed top-4 right-4 z-50">
+                  <SettingsButton />
+                </div>
+
+                {/* The dialog component is mounted at the root so it can be opened from anywhere */}
+                <SettingsDialog />
+
+                {children}
+                <Footer />
               </div>
-
-              {/* The dialog component is mounted at the root so it can be opened from anywhere */}
-              <SettingsDialog />
-
-              {children}
-              <Footer />
             </NextIntlClientProvider>
           </ThemeProvider>
         </SettingsProvider>

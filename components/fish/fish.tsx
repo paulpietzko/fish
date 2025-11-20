@@ -81,7 +81,7 @@ export default function Fish({
 
     // Show random translated message
     const randomKey =
-      CLICK_MESSAGE_KEYS[Math.floor(Math.random() * CLICK_MESSAGE_KEYS.length)];
+      `messages.${CLICK_MESSAGE_KEYS[Math.floor(Math.random() * CLICK_MESSAGE_KEYS.length)]}`;
     setClickMessage(t(randomKey));
 
     // Hide message after 2 seconds
