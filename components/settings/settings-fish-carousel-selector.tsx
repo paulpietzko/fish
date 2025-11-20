@@ -18,7 +18,7 @@ export default function SettingsFishCarouselSelector({
   onSelect?: (fish: number) => void;
 }) {
   const [selected, setSelected] = useState(initialFish);
-  const fishes = [1, 2, 3];
+  const fishes = [1, 2, 3, 4];
 
   // Update selected fish when initialFish changes
   useEffect(() => {
