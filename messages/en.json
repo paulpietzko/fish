@@ -11,7 +11,9 @@
     "language": {
       "title": "Language Settings",
       "en": "English",
-      "de": "German"
+      "de": "German",
+      "bu": "Under Water",
+      "bi": "Binary"
     },
     "fish": {
       "title": "Fish Carousel"

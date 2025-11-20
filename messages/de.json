@@ -11,7 +11,9 @@
     "language": {
       "title": "Sprachauswahl",
       "en": "Englisch",
-      "de": "Deutsch"
+      "de": "Deutsch",
+      "bu": "Unterwasser",
+      "bi": "Binär"
     },
     "fish": {
       "title": "Fischauswahl"

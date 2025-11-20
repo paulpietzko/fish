@@ -1,0 +1,61 @@
+{
+  "Settings": {
+    "title": "Blubblub",
+    "Description": "Blub blub blub.",
+    "theme": {
+      "title": "Blub Theme",
+      "light": "Blub Light",
+      "dark": "Blub Dark",
+      "system": "Blub System"
+    },
+    "language": {
+      "title": "Blubguage",
+      "en": "Blub En",
+      "de": "Blub De",
+      "bu": "Blublub",
+      "bi": "Blub 0101"
+    },
+    "fish": {
+      "title": "Blub Fish"
+    },
+    "timestamps": {
+      "title": "Blub Timestamps",
+      "start": "Blub Start",
+      "end": "Blub End"
+    },
+    "movement": {
+      "title": "Blub Move",
+      "move": "Blub Move",
+      "uncover": "Blub Uncover"
+    },
+    "timegrid": {
+      "title": "Blub Timegrid",
+      "show": "Blub Show Grid"
+    }
+  },
+  "Fish": {
+    "completed": "Blub! Blub job!",
+    "messages": {
+      "msg1": "blub no",
+      "msg2": "blub can't",
+      "msg3": "blub few...",
+      "msg4": "blub can't wait",
+      "msg5": "blub should we",
+      "msg6": "blub patience...",
+      "msg7": "blub almost",
+      "msg8": "blub not yet",
+      "msg9": "blub hold",
+      "msg10": "blub soon"
+    },
+    "fishReferences": {
+      "title": "Blub References"
+    }
+  },
+  "Footer": {
+    "madeBy": "Blub by",
+    "boredDevs": "blub devs",
+    "sponsoredBy": "Blub by",
+    "copyright": "Blub © {year}",
+    "fishReferences": "Blub References"
+  }
+}

@@ -31,9 +31,9 @@ export default function FishReferencesPage() {
                   width={150}
                   height={150}
                 />
-                <pre className="mt-2 text-sm text-gray-500 whitespace-pre-wrap">
+                <em className="mt-2 text-sm text-gray-500 whitespace-pre-wrap">
                   {fish.source}
-                </pre>
+                </em>
               </p>
             </Link>
           </div>
